@@ -1,0 +1,98 @@
+---
+title: "bayes-ch6"
+output: html_document
+---
+
+# Chapter 6
+
+### Exercise 6.1-A
+
+```{r}
+source("DBDA2Eprograms/DBDA2E-utilities.R")
+source("DBDA2Eprograms/BernBeta.R")
+
+posterior <- BernBeta(priorBetaAB = c(4,4), Data=c(1), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6.2-B
+
+```{r}
+posterior <- BernBeta(priorBetaAB = posterior, Data=c(1), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6.2-C
+
+```{r}
+posterior <- BernBeta(priorBetaAB = posterior, Data=c(0), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6.2-D
+
+```{r}
+posterior <- BernBeta(priorBetaAB = c(4,4), Data=c(0,1,1), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+The results are the same (between 6.2-C and 6.2-D).
+
+### Exercise 6.2-A
+
+In a survey, 58 would like candidate A (1) and 42 would like candidate B (0), given a uniform prior, what the HDI posterior?
+```{r}
+posterior <- BernBeta(priorBetaAB = c(1,1), Data=c(rep(1,58), rep(0,42)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+poll 100 new people, 57 would like candidate A (1), 43 for B (0).
+
+```{r}
+posterior <- BernBeta(priorBetaAB = posterior, 
+                      Data=c(rep(1,57), rep(0,43)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6-3 
+First: 40 people chose F and 10 chose J.  
+Second: 15 chose F and 35 chose J.
+assume uniform prior distribution
+
+Set F = 1 and J = 0
+
+```{r}
+posterior <- BernBeta(priorBetaAB = c(1,1), 
+                      Data=c(rep(1,40), rep(0,10)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+posterior <- BernBeta(priorBetaAB = posterior, 
+                      Data=c(rep(1,15), rep(0,35)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6-4
+
+```{r}
+posterior <- BernBeta(priorBetaAB = c(0.1,0.1), 
+                      Data=c(rep(1,4), rep(0,1)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6-5-A
+
+```{r}
+### Strong bias towards a fair coin
+posterior <- BernBeta(priorBetaAB = c(100,100), 
+                      Data=c(rep(1,9), rep(0,1)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
+### Exercise 6.5-B
+
+```{r}
+### Strong bias towards a fair coin
+posterior <- BernBeta(priorBetaAB = c(0.1,0.1), 
+                      Data=c(rep(1,9), rep(0,1)), plotType="Bars",
+                      showCentTend = "Mode", showHDI = TRUE, showpD = FALSE)
+```
+
